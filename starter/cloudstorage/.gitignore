@@ -31,3 +31,6 @@ target/
 
 ### MacOs ###
 .DS_Store
+/bin/
+
+starter/cloudstorage/src/main/java/META-INF/MANIFEST.MF
