@@ -24,7 +24,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests().antMatchers("/", "/api/*").permitAll()// only lets you view page with "/" or "/api"
+		http.authorizeRequests()
+			.antMatchers("*/h2/**","/api/").permitAll()// only lets you view page with "/" or "/api"
 				.and().formLogin().loginPage("/login") // login page url
 				.defaultSuccessUrl("/home")
 				// .failureUrl(authenticationFailureUrl)
