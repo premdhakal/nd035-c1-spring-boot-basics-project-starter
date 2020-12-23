@@ -10,6 +10,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 
 @Controller
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
@@ -25,7 +26,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
-			.antMatchers("*/h2/**","/api/").permitAll()// only lets you view page with "/" or "/api"
+			.antMatchers("/api/","/css/*","/js/*","/signup").permitAll()// only lets you view page with "/" or "/api"
+			.anyRequest().authenticated() //authenticate other pages
 				.and().formLogin().loginPage("/login") // login page url
 				.defaultSuccessUrl("/home")
 				// .failureUrl(authenticationFailureUrl)
@@ -40,4 +42,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.password(passwordEncoder.encode("123456")).roles("USER");
 	}
 
+	
+	@Override 
+	public void configure(WebSecurity web) throws Exception 
+	{ web.ignoring() 
+		.antMatchers("/h2/**");
+	}
+	 
 }

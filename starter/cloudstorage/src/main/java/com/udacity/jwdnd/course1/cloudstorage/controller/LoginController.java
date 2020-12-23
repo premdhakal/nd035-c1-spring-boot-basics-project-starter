@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class LoginController {
 
+	
 	@GetMapping("/login")
 	public String getLoginPage() {
 		return "login";
